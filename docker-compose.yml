@@ -1,0 +1,31 @@
+version: "3.3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - database
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - gem_cache:/usr/local/bundle/gems
+      - node_modules:/app/node_modules
+    env_file: .env
+    command: bundle exec rails s -b 0.0.0.0 -p 3000 -e ${MODE}
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+  database:
+    image: postgres:13.2
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+volumes:
+  gem_cache:
+  db_data:
+  node_modules:
+
