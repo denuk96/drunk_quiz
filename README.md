@@ -2,6 +2,7 @@
 - ruby 2.7.2
 - rails 6.1
 - postgre 13.2
+- redis 6.2
 
 ##### How to run this?
 to build containers: 

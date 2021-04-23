@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - database
+      - redis
     ports:
       - "3000:3000"
     volumes:
@@ -24,8 +25,15 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  redis:
+    image: redis:6.2
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis:/data
 volumes:
   gem_cache:
   db_data:
   node_modules:
+  redis:
 

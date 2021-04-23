@@ -29,7 +29,7 @@ RUN apk add --update --no-cache \
       yarn
 
 RUN gem install bundler -v 2.2.15
-RUN gem install rails
+RUN gem install rails -v 6.1.3.1
 
 WORKDIR /app
 
@@ -41,5 +41,7 @@ COPY package.json yarn.lock ./
 RUN yarn install --check-files
 
 COPY . ./
+
+RUN bundle install
 
 ENTRYPOINT ["sh", "entrypoints/docker-entrypoint.sh"]
