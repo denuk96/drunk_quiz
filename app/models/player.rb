@@ -18,7 +18,8 @@
 #
 class Player < ApplicationRecord
   belongs_to :game
-  has_many :own_game, class_name: 'Game', foreign_key: 'player_id'
+  has_many :own_games, class_name: 'Game', foreign_key: 'player_id', dependent: :destroy
+  has_many :questions, dependent: :destroy
 
-  accepts_nested_attributes_for :own_game
+  accepts_nested_attributes_for :own_games
 end
