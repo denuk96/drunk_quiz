@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  before_action :set_game, -> { find_player(params[:slug]) }, only: :show
+
   def menu; end
 
   def new
@@ -20,6 +22,10 @@ class GamesController < ApplicationController
     end
   end
 
+  def show
+
+  end
+
   private
 
   def strong_params
@@ -27,5 +33,9 @@ class GamesController < ApplicationController
       :name,
       own_games_attributes: %i[min_questions max_questions]
     )
+  end
+
+  def set_game
+    @game = Game.find_by(slug: params[:slug])
   end
 end

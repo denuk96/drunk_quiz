@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   before_action :set_game, -> { find_player(params[:game_slug]) }
 
   def new
-    redirect_to_game(@game.slug) if enough_questions?
+    redirect_to game_path(@game.slug) if enough_questions?
 
     @questions_done = @player.questions.count
     @questions_left = @game.max_questions
@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
     question.player = @player
 
     if question.save && enough_questions?
-      redirect_to_game(@game.slug)
+      redirect_to games_path(@game.slug)
     else
       redirect_to new_game_question_path(game_slug: @game.slug)
     end
@@ -24,10 +24,6 @@ class QuestionsController < ApplicationController
 
   def enough_questions?
     @player.questions.count >= @game.max_questions
-  end
-
-  def redirect_to_game(slug)
-    raise 'redirect'
   end
 
   def set_game

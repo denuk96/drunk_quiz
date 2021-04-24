@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'menu', to: 'games#menu', as: :menu
 
-  resources :games, only: %i[new create], param: :slug do
+  resources :games, only: %i[new create show], param: :slug do
     resources :questions, only: %i[new create]
   end
 end
