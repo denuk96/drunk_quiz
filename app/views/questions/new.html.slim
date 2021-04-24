@@ -1,1 +1,7 @@
-= @player.name
+.container
+  .row
+    .col-lg-12
+      h2 #{@questions_done + 1} of #{@questions_left}
+      = simple_form_for @question, url: game_questions_path do |f|
+        = f.input :text
+        = f.submit
