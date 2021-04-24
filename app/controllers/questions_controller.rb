@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  include GameProcessConcern
   before_action :set_game, -> { find_player(params[:game_slug]) }
 
   def new
@@ -21,10 +22,6 @@ class QuestionsController < ApplicationController
   end
 
   private
-
-  def enough_questions?
-    @player.questions.count >= @game.max_questions
-  end
 
   def set_game
     @game = Game.find_by(slug: params[:game_slug])

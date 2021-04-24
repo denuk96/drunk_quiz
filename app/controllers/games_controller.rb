@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  include GameProcessConcern
   before_action :set_game, -> { find_player(params[:slug]) }, only: :show
 
   def menu; end
@@ -14,7 +15,7 @@ class GamesController < ApplicationController
     @game.save!
     @player.game_id = @game.id
     if @player.save
-      save_user_session(@game.slug, @player.id)
+      save_player_to_session(@game.slug, @player.id)
 
       redirect_to new_game_question_path(game_slug: @game.slug)
     else
