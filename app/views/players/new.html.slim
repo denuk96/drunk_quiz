@@ -1,0 +1,6 @@
+.container
+  .row
+    .col-lg-6
+      = simple_form_for @player, url: game_players_path(game_slug: @game.slug) do |f|
+        = f.input :name
+        = f.submit 'Join'

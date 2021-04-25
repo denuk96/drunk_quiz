@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   include GameProcessConcern
-  before_action :set_game, -> { find_player(params[:slug]) }, only: :show
+  before_action -> { set_game(params[:slug]) }, -> { find_player(params[:slug]) }, only: :show
 
   def menu; end
 
@@ -24,7 +24,7 @@ class GamesController < ApplicationController
   end
 
   def show
-
+    redirect_to new_game_question_path(game_slug: @game.slug) unless enough_questions?
   end
 
   private
@@ -34,9 +34,5 @@ class GamesController < ApplicationController
       :name,
       own_games_attributes: %i[min_questions max_questions]
     )
-  end
-
-  def set_game
-    @game = Game.find_by(slug: params[:slug])
   end
 end

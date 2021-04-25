@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'menu', to: 'games#menu', as: :menu
 
   resources :games, only: %i[new create show], param: :slug do
+    resources :players, only: %i[new create]
     resources :questions, only: %i[new create]
   end
 end

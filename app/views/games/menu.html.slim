@@ -1,3 +1,7 @@
 .container
   .row
-    .col-lg-12
+    .col-lg-6
+      = link_to "new game", new_game_path
+    .col-lg-6
+      = text_field_tag :room_number, '', maxlength: 4, id: :room_number, placeholder: 'room number'
+      = submit_tag :join, onclick: 'window.redirectToGameNum()'

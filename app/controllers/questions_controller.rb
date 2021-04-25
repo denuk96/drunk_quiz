@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   include GameProcessConcern
-  before_action :set_game, -> { find_player(params[:game_slug]) }
+  before_action -> { set_game(params[:game_slug]) }, -> { find_player(params[:game_slug]) }
 
   def new
     redirect_to game_path(@game.slug) if enough_questions?
@@ -22,10 +22,6 @@ class QuestionsController < ApplicationController
   end
 
   private
-
-  def set_game
-    @game = Game.find_by(slug: params[:game_slug])
-  end
 
   def strong_params
     params.require(:question).permit(:text)
