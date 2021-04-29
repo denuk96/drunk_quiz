@@ -8,9 +8,6 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-import moment from "moment";
-
-console.log(moment("20111031", "YYYYMMDD").fromNow())
 
 Rails.start()
 Turbolinks.start()

@@ -10,12 +10,12 @@ gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
-gem 'rails_performance'
 gem 'slim'
 gem 'simple_form'
 # == redis ==
+gem "redis", "~> 4.0"
 gem 'hiredis'
-gem "redis"
+# gem 'rails_performance'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

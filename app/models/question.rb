@@ -25,4 +25,6 @@ class Question < ApplicationRecord
 
   belongs_to :player
   belongs_to :game
+
+  scope :available_player_questions, ->(game_id, player_id) { where(game_id: game_id, status: :open, player_id: player_id) }
 end

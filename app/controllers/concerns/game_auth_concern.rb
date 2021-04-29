@@ -4,7 +4,7 @@ module GameAuthConcern
   private
 
   def save_player_to_session(game_slug, player_id)
-    store = session[:player] || {}
+    store = session[:store] || {}
     store.merge!("#{game_slug}": player_id)
     session[:store] = store
   end

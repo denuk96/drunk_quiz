@@ -77,5 +77,5 @@ Rails.application.configure do
   # config.webpacker.check_yarn_integrity = false
 
   config.action_controller.perform_caching = true
-  # config.cache_store = :redis_store, { driver: :hiredis, url: ENV['REDIS_HOST'] }
+  config.cache_store = :redis_cache_store, { url: ENV['REDIS_HOST'] }
 end
