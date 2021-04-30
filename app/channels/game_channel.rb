@@ -26,12 +26,12 @@ class GameChannel < ApplicationCable::Channel
   private
 
   def current_question
-    Rails.cache.fetch("game: #{game}", expires_in: 1.hours) do
+    Rails.cache.fetch("game: #{game.id}", expires_in: 1.hours) do
       QuestionsManager.new(game).next_question
     end
   end
 
   def broadcast_question
-    GameChannel.broadcast_to(channel_name, current_question)
+    ActionCable.server.broadcast(channel_name, current_question)
   end
 end

@@ -15,7 +15,7 @@ class QuestionsController < ApplicationController
     question.player = @player
 
     if question.save && enough_questions?
-      redirect_to game_path(game_slug: @game.slug)
+      redirect_to game_path(slug: @game.slug)
     else
       redirect_to new_game_question_path(game_slug: @game.slug)
     end

@@ -47,6 +47,7 @@ $( document ).on('turbolinks:load', function() {
     addListeners() {
       startBtn.click((e) => {
         this.startGame()
+        e.target.hide()
       })
     }
   });
