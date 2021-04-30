@@ -18,10 +18,10 @@ class GameChannel < ApplicationCable::Channel
     game.active!
     broadcast_question
   end
-  #
-  # def next_question
-  #
-  # end
+  
+  def next_question
+
+  end
 
   private
 

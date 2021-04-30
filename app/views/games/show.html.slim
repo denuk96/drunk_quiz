@@ -4,6 +4,7 @@
       h3 The game
       #game-container data-game-id=(@game.id) data-player-id=(@player.id)
         = @game.slug
+        #question_body
         - if @game.open? && @game.owner == @player
           = button_tag 'start game', id: 'start-game-btn'
-
+          = button_tag 'next question', id: 'next-question-btn'
