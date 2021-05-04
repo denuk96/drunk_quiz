@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+#
 # select next question for rand player
 class QuestionsManager
   attr_reader :game
@@ -6,13 +8,13 @@ class QuestionsManager
   def initialize(game)
     @game = game
     @questions = []
-    random_player
   end
 
   def next_question
+    random_player
     collect_available_questions
     question_for_current_player
-    serialize_output
+    output
   end
 
   private
@@ -28,14 +30,13 @@ class QuestionsManager
   def question_for_current_player
     question = questions.reject { |q| q.player_id == current_player.id }.sample
     question&.closed!
-    random_player
-    question
+    self.current_question = question
   end
 
-  def serialize_output
+  def output
     {
       player_name: current_player.name,
-      question: current_question&.body,
+      question: current_question&.text,
       questions_left: questions.size
     }
   end

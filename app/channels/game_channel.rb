@@ -5,6 +5,7 @@ class GameChannel < ApplicationCable::Channel
     @player = Player.find params[:player_id]
     @game = Game.find params[:game_id]
     @channel_name = "Game-#{params[:game_id]}"
+
     stream_from(@channel_name)
 
     broadcast_question if @game.active?
@@ -18,15 +19,16 @@ class GameChannel < ApplicationCable::Channel
     game.active!
     broadcast_question
   end
-  
-  def next_question
 
+  def next_question
+    Rails.cache.delete(channel_name)
+    broadcast_question
   end
 
   private
 
   def current_question
-    Rails.cache.fetch("game: #{game.id}", expires_in: 1.hours) do
+    Rails.cache.fetch(channel_name, expires_in: 1.hours) do
       QuestionsManager.new(game).next_question
     end
   end

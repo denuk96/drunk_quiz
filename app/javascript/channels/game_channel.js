@@ -53,7 +53,7 @@ $( document ).on('turbolinks:load', function() {
     addListeners() {
       startBtn.click(e => {
         this.startGame()
-        e.target.hide()
+        Turbolinks.visit(location.toString());
       })
 
       nextQuestionBtn.click(e => {
@@ -74,7 +74,12 @@ $( document ).on('turbolinks:load', function() {
       </div>
     `
     } else {
-
+      return `
+      <h5>No questions left</h5>
+      <div>
+        <a href="/">To main</a>
+      </div>
+    `
     }
   }
 })

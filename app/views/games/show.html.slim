@@ -7,4 +7,5 @@
         #question_body
         - if @game.open? && @game.owner == @player
           = button_tag 'start game', id: 'start-game-btn'
+        - if @game.active? && @game.owner == @player
           = button_tag 'next question', id: 'next-question-btn'

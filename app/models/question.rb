@@ -27,5 +27,4 @@ class Question < ApplicationRecord
   belongs_to :game
 
   scope :available_questions, ->(game_id) { where(game_id: game_id, status: :open) }
-  scope :available_player_questions, ->(game_id, player_id) { available_questions(game_id).where.not(player_id: player_id) }
 end
