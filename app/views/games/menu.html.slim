@@ -1,7 +1,9 @@
-.container
-  .row
-    .col-lg-6
-      = link_to "new game", new_game_path
-    .col-lg-6
-      = text_field_tag :room_number, '', maxlength: 4, id: :room_number, placeholder: 'room number'
-      = submit_tag :join, onclick: 'window.redirectToGameNum()'
+.menu
+  h2.menu__header
+    | Lets Quiz!
+  = link_to "new game", new_game_path, class: 'btn btn-primary menu__new-game-btn'
+  a.menu__toggle-btn.btn.btn-primary data-toggle="collapse" href=".menu__joins-form" role="button" aria-expanded="false" aria-controls="collapseExample"
+    | Join
+  .menu__joins-form.form.collapse
+    = text_field_tag :room_number, '', maxlength: 4, id: :room_number, placeholder: 'room number', class: 'form-control'
+    = submit_tag :submit, onclick: 'window.redirectToGameNum()', class: 'btn btn-success menu__joins-btn'

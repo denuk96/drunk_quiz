@@ -15,3 +15,22 @@
  */
 
 @import "bootstrap/scss/bootstrap";
+
+@import "vars";
+@import "form";
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: $global-background-color;
+  color: $global-font-color;
+
+  .btn {
+    box-shadow: 1px 1px 1px 1px $global-shadow-color;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+}
