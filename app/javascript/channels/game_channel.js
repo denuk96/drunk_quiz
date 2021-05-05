@@ -22,22 +22,25 @@ $( document ).on('turbolinks:load', function() {
 
     },
 
+    // called on subscribing to channel
     connected() {
       console.log('connected')
-
-
       this.setup()
     },
 
+    // called on disconnecting
     disconnected() {
       console.log('disconnected')
     },
 
+    // called when server publish something
     received(data) {
       console.log('received: ', data)
       questionBody.html(questionTemplate(data))
+      if (data.question == null) { nextQuestionBtn.hide() }
     },
 
+    // custom instance methods
     setup() {
       this.addListeners()
     },
