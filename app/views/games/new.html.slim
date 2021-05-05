@@ -1,11 +1,13 @@
-.container
-  .row
-    .col-lg-12
-      h2 New game
-      = simple_form_for @player, url: games_path do |f|
-        = f.input :name
-        = f.simple_fields_for :own_games do |game|
-          = game.input :min_questions
-          = game.input :max_questions
-
-        = f.submit 'Create game'
+.form
+  h2.form__header
+    | New game
+  = simple_form_for @player, html: { class: 'form__body' }, url: games_path do |f|
+    .form-group
+      = f.input :name, class: 'form-control'
+    = f.simple_fields_for :own_games do |game|
+      .form-group
+        = game.input :min_questions, class: 'form-control'
+      .form-group
+        = game.input :max_questions, class: 'form-control'
+    .form-group.form__submit
+      = f.submit 'Create game', class: 'btn btn-success form__submit-btn'

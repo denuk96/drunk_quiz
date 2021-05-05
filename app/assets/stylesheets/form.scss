@@ -1,5 +1,30 @@
-.form {
-  .form__submit-btn {
+@import "vars";
 
+.form {
+  position: absolute;
+  top: 5%;
+  width: 100%;
+
+  .form__header {
+    text-align: center;
+  }
+
+  .form-group {
+    padding: 0 5px;
+
+    .form-control {
+      box-shadow: 1px 1px 1px 1px $global-shadow-color;
+    }
+  }
+
+  .form__submit {
+    padding: 0 11px;
+
+    .form__submit-btn {
+      width: 100%;
+      padding: 0 5px;
+      height: 40px;
+      vertical-align: center;
+    }
   }
 }

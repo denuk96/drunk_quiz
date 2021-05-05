@@ -26,5 +26,7 @@ class Question < ApplicationRecord
   belongs_to :player
   belongs_to :game
 
+  validates :text, presence: true, length: { minimum: 10 }
+
   scope :available_questions, ->(game_id) { where(game_id: game_id, status: :open) }
 end

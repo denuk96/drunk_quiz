@@ -21,5 +21,7 @@ class Player < ApplicationRecord
   has_many :own_games, class_name: 'Game', foreign_key: 'player_id', dependent: :destroy
   has_many :questions, dependent: :destroy
 
+  validates :name, presence: true, uniqueness: true, scope: :game_id
+
   accepts_nested_attributes_for :own_games
 end
