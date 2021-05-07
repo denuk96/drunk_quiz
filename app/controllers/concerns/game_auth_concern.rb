@@ -12,5 +12,7 @@ module GameAuthConcern
   def find_player(game_slug)
     id = session[:store][game_slug.to_s]
     @player = Player.find id
+  rescue ActiveRecord::RecordNotFound, NoMethodError
+    raise CustomErrors::SessionAuthError
   end
 end

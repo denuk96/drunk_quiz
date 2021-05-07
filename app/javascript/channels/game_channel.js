@@ -83,9 +83,9 @@ $( document ).on('turbolinks:load', function() {
     } else {
       return `
       <h5>No questions left</h5>
-      <div>
+      <p>
         <a href="/">To main</a>
-      </div>
+      </p>
     `
     }
   }

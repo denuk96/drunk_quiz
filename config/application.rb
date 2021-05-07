@@ -11,5 +11,6 @@ module DrunkQuiz
     config.load_defaults 6.1
     config.generators.system_tests = nil
     config.generators.test_framework false
+    config.eager_load_paths << Rails.root.join('lib')
   end
 end
