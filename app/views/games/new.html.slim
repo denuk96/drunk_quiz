@@ -2,6 +2,10 @@
   h2.form__header
     | New game
   = simple_form_for @player, html: { class: 'form__body' }, url: games_path do |f|
+    - if @player.errors.present?
+      .alert.alert-danger
+        - @player.errors.full_messages.each do |msg|
+          = msg
     .form-group
       = f.input :name, class: 'form-control'
     = f.simple_fields_for :own_games do |game|

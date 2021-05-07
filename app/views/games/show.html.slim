@@ -1,11 +1,13 @@
-.container
-  .row
-    .col-lg-12
-      h3 The game
-      #game-container data-game-id=(@game.id) data-player-id=(@player.id)
-        = @game.slug
-        #question_body
-        - if @game.open? && @game.owner == @player
-          = button_tag 'start game', id: 'start-game-btn'
-        - if @game.active? && @game.owner == @player
-          = button_tag 'next question', id: 'next-question-btn'
+.game
+  h2.game__header
+    | Game ##{@game.slug}
+  #game-container.game__container data-game-id=(@game.id) data-player-id=(@player.id)
+    #question_body.game__questions
+      - if @game.open? && @game.owner != @player
+        h5
+          | awaiting while "#{@game.owner.name}" start the game
+    .game__buttons
+      - if @game.open? && @game.owner == @player
+        = button_tag 'start game', id: 'start-game-btn', class: 'btn btn-success'
+      - if @game.active? && @game.owner == @player
+        = button_tag 'next question', id: 'next-question-btn', class: 'btn'

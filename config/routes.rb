@@ -7,6 +7,4 @@ Rails.application.routes.draw do
     resources :players, only: %i[new create]
     resources :questions, only: %i[new create]
   end
-
-  # mount ActionCable.server => '/ga'
 end

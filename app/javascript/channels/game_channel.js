@@ -56,10 +56,11 @@ $( document ).on('turbolinks:load', function() {
     addListeners() {
       startBtn.click(e => {
         this.startGame()
-        Turbolinks.visit(location.toString());
+        document.location.reload();
       })
 
       nextQuestionBtn.click(e => {
+        e.stopPropagation()
         this.nextQuestion()
       })
     },

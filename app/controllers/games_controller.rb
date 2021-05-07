@@ -19,7 +19,7 @@ class GamesController < ApplicationController
 
       redirect_to new_game_question_path(game_slug: @game.slug)
     else
-      render :new, notice: 'Smth went wrong'
+      render :new
     end
   end
 

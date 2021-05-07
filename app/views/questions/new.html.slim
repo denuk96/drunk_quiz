@@ -1,7 +1,7 @@
 .form
   h2.form__header
     | #{@questions_done + 1} of #{@questions_left}
-  = simple_form_for @question, url: game_questions_path do |f|
+  = simple_form_for @question, url: game_questions_path, method: :post do |f|
     .form-group
       = f.input :text, class: 'form-control', input_html: { minlength: 10 }
     .form-group.form__submit

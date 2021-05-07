@@ -9,6 +9,20 @@
     text-align: center;
   }
 
+  .alert {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+  }
+
+  .invalid-feedback {
+    color: $global-font-color;
+  }
+
+  abbr {
+    color: #de5c5c;
+  }
+
   .form-group {
     padding: 0 5px;
 
