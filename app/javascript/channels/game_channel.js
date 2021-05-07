@@ -1,4 +1,5 @@
 import consumer from "./consumer"
+import shake_effect from "../packs/shake_effect";
 
 $( document ).on('turbolinks:load', function() {
   const gameContainer = $('#game-container')
@@ -37,6 +38,7 @@ $( document ).on('turbolinks:load', function() {
     received(data) {
       console.log('received: ', data)
       questionBody.html(questionTemplate(data))
+      shake_effect(questionBody[0])
       if (data.question == null) { nextQuestionBtn.hide() }
     },
 
@@ -69,13 +71,14 @@ $( document ).on('turbolinks:load', function() {
   function questionTemplate(data) {
     if (data.question) {
       return `
-      <h5>Question for <b>${data.player_name}</b></h5>
-      <div>
+      <h5><b>${data.player_name}</b></h5>
+      <hr>
+      <p>
         ${data.question}
-      </div>
-      <div>
-        Questions left ${data.questions_left}
-      </div>
+      </p>
+      <span>
+        Left ${data.questions_left}..
+      </span>
     `
     } else {
       return `

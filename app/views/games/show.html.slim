@@ -1,8 +1,8 @@
 .game
   h2.game__header
     | Game ##{@game.slug}
-  #game-container.game__container data-game-id=(@game.id) data-player-id=(@player.id)
-    #question_body.game__questions
+  #game-container data-game-id=(@game.id) data-player-id=(@player.id)
+    #question_body
       - if @game.open? && @game.owner != @player
         h5
           | awaiting while "#{@game.owner.name}" start the game
@@ -10,4 +10,4 @@
       - if @game.open? && @game.owner == @player
         = button_tag 'start game', id: 'start-game-btn', class: 'btn btn-success'
       - if @game.active? && @game.owner == @player
-        = button_tag 'next question', id: 'next-question-btn', class: 'btn'
+        = button_tag 'next question', id: 'next-question-btn', class: 'btn btn-danger'
