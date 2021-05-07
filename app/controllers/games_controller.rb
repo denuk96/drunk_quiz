@@ -24,10 +24,14 @@ class GamesController < ApplicationController
   end
 
   def show
-    redirect_to new_game_question_path(game_slug: @game.slug) unless enough_questions?
+    redirect_to new_game_question_path(game_slug: @game.slug) unless can_join?
   end
 
   private
+
+  def can_join?
+    enough_questions? || max_questions?
+  end
 
   def strong_params
     params.require(:player).permit(

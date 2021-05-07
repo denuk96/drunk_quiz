@@ -3,17 +3,18 @@ class QuestionsController < ApplicationController
   before_action -> { set_game(params[:game_slug]) }, -> { find_player(params[:game_slug]) }
 
   def new
-    redirect_to game_path(@game.slug) if enough_questions?
+    redirect_to game_path(@game.slug) if max_questions?
 
     count_questions
     @question = Question.new
+    @can_skip = enough_questions?
   end
 
   def create
     @question = @game.questions.build(strong_params)
     @question.player = @player
 
-    if @question.save && enough_questions?
+    if @question.save && max_questions?
       redirect_to game_path(slug: @game.slug)
     elsif @question.errors
       count_questions
