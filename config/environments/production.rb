@@ -119,5 +119,5 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   config.action_controller.perform_caching = true
-  config.cache_store = :redis_cache_store, { driver: :hiredis, url: ENV['REDIS_HOST'] }
+  config.cache_store = :redis_cache_store, { url: ENV['REDIS_HOST'] }
 end
