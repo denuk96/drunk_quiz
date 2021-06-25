@@ -2,11 +2,13 @@
   h2.game__header
     | Game ##{@game.slug}
   #game-container data-game-id=(@game.id) data-player-id=(@player.id)
-    - if @game.active?
-      #question_body
-        - if @game.open? && @game.owner != @player
-          h5
-            | awaiting while "#{@game.owner.name}" start the game
+    #question_body
+      - if @game.open? && @game.owner != @player
+        h5
+          | awaiting while "#{@game.owner.name}" start the game
+      - else
+        h5
+          | Ready for start
     .game__buttons
       - if @game.open? && @game.owner == @player
         = button_tag 'start game', id: 'start-game-btn', class: 'btn btn-success'
