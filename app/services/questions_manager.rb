@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # select next question for rand player
 class QuestionsManager
