@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'slim'
 gem 'simple_form'
+gem 'rubocop'
 # == redis ==
 gem "redis", "~> 4.0"
 gem 'hiredis'

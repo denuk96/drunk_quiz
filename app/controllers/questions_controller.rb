@@ -16,8 +16,9 @@ class QuestionsController < ApplicationController
 
     if @question.save && max_questions?
       redirect_to game_path(slug: @game.slug)
-    elsif @question.errors
+    elsif @question.errors.any?
       count_questions
+      @can_skip = enough_questions?
 
       render :new
     else

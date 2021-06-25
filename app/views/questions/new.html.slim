@@ -3,7 +3,7 @@
     | #{@questions_done + 1} of #{@questions_left}
   = simple_form_for @question, url: game_questions_path, method: :post do |f|
     .form-group
-      = f.input :text, class: 'form-control', input_html: { minlength: 10 }
+      = f.input :text, class: 'form-control', input_html: { minlength: 10 }, label: 'Your question'
     .form-group.form__submit
       = f.submit :submit,  class: 'btn btn-success form__submit-btn'
   = link_to 'skip and join game', game_path(slug: @game.slug), class: 'btn btn-danger form__skip' if @can_skip
