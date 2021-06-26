@@ -9,9 +9,8 @@
     .form-group
       = f.input :name, class: 'form-control'
     = f.simple_fields_for :own_games do |game|
-      .form-group
-        = game.input :min_questions, class: 'form-control'
-      .form-group
-        = game.input :max_questions, class: 'form-control'
+      - Game::SAFE_ATTRIBUTES.each do |field|
+        .form-group
+          = game.input field, class: 'form-control', input_html: { min: 0, max: 5 }
     .form-group.form__submit
       = f.submit 'Create game', class: 'btn btn-success form__submit-btn'

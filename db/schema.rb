@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_23_114846) do
+ActiveRecord::Schema.define(version: 2021_06_26_074030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2021_04_23_114846) do
     t.integer "min_questions", default: 0
     t.integer "max_questions", default: 999
     t.integer "status", default: 0
+    t.integer "max_target_questions", default: 0
     t.index ["player_id"], name: "index_games_on_player_id"
     t.index ["slug"], name: "index_games_on_slug"
   end

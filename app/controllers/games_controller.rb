@@ -36,7 +36,7 @@ class GamesController < ApplicationController
   def strong_params
     params.require(:player).permit(
       :name,
-      own_games_attributes: %i[min_questions max_questions]
+      own_games_attributes: Game::SAFE_ATTRIBUTES
     )
   end
 end
