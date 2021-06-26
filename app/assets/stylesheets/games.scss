@@ -65,8 +65,24 @@
       .btn {
         color: $global-font-color;
         margin: 0 10px;
-        width: 90%;
+        width: $btn-width;
       }
+    }
+  }
+
+  #target-question-container {
+    margin: 10% 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .target-question-container__toggle-btn {
+      margin: 10% 0 3% 5%;
+      width: $btn-width;
+    }
+
+    .target-question-container__form {
+
     }
   }
 

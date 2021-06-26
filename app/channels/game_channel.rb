@@ -32,11 +32,15 @@ class GameChannel < ApplicationCable::Channel
   def current_question
     Rails.cache.fetch(channel_name, expires_in: 1.hours) do
       QuestionsManager.new(game).next_question
-    end
+    end.merge(players: all_players_hash)
   end
 
   def broadcast_question
     # broadcasting data to each subscriber
     ActionCable.server.broadcast(channel_name, current_question)
+  end
+
+  def all_players_hash
+    game.players.map { |p| { id: p.id, name: p.name} }
   end
 end

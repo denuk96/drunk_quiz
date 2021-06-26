@@ -1,5 +1,6 @@
 import consumer from "./consumer"
 import shakeEffect from "../packs/shake_effect";
+import {updatePlayersList} from "../packs/game/targetQuestion";
 
 $( document ).on('turbolinks:load', function() {
   const gameContainer = $('#game-container')
@@ -39,7 +40,8 @@ $( document ).on('turbolinks:load', function() {
       console.log('received: ', data)
       questionBody.html(questionTemplate(data))
       shakeEffect(questionBody[0])
-      if (data.question == null) { nextQuestionBtn.hide() }
+      if (data.question == null) { nextQuestionBtn.hide() } else { nextQuestionBtn.show() }
+      updatePlayersList(data.players, playerId)
     },
 
     // custom instance methods
