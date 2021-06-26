@@ -14,4 +14,5 @@
         = button_tag 'start game', id: 'start-game-btn', class: 'btn btn-success'
       - if @game.active? && @game.owner == @player
         = button_tag 'next question', id: 'next-question-btn', class: 'btn btn-danger'
+  h1 =@available_target_question
   #current-page-qr-code

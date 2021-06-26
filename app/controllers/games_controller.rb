@@ -24,14 +24,11 @@ class GamesController < ApplicationController
   end
 
   def show
-    redirect_to new_game_question_path(game_slug: @game.slug) unless can_join?
+    redirect_to new_game_question_path(game_slug: @game.slug) and return unless can_join?
+    @available_target_question = @game.target_questions_left(@player.id)
   end
 
   private
-
-  def can_join?
-    enough_questions? || max_questions?
-  end
 
   def strong_params
     params.require(:player).permit(

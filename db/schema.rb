@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_26_074030) do
+ActiveRecord::Schema.define(version: 2021_06_26_080652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2021_06_26_074030) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "player_id"
     t.integer "min_questions", default: 0
-    t.integer "max_questions", default: 999
+    t.integer "max_questions", default: 3
     t.integer "status", default: 0
     t.integer "max_target_questions", default: 0
     t.index ["player_id"], name: "index_games_on_player_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2021_06_26_074030) do
     t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "target_player_id"
     t.index ["game_id"], name: "index_questions_on_game_id"
     t.index ["player_id"], name: "index_questions_on_player_id"
   end

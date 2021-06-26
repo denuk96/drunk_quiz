@@ -29,7 +29,9 @@ class QuestionsManager
   end
 
   def question_for_current_player
-    question = questions.reject { |q| q.player_id == current_player.id }.sample
+    question = questions.select do |q|
+      q.player_id != current_player.id && (q.target_player_id.present? ? (q.target_player_id == current_player.id) : true)
+    end.sample
     question&.closed!
     self.current_question = question
   end

@@ -2,13 +2,14 @@
 #
 # Table name: questions
 #
-#  id         :bigint           not null, primary key
-#  status     :integer          default("open")
-#  text       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  game_id    :bigint           not null
-#  player_id  :bigint           not null
+#  id               :bigint           not null, primary key
+#  status           :integer          default("open")
+#  text             :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  game_id          :bigint           not null
+#  player_id        :bigint           not null
+#  target_player_id :integer
 #
 # Indexes
 #

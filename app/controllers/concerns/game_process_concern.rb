@@ -14,4 +14,8 @@ module GameProcessConcern
   def enough_questions?
     @player.questions.count >= @game.min_questions
   end
+
+  def can_join?
+    enough_questions? || max_questions?
+  end
 end
