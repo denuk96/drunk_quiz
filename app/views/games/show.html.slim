@@ -14,12 +14,12 @@
         = button_tag 'start game', id: 'start-game-btn', class: 'btn btn-success'
       - if @game.active? && @game.owner == @player
         = button_tag 'next question', id: 'next-question-btn', class: 'btn btn-danger'
-  #target-question-container data-available-target-question=@available_target_question data-game-target-questions-max=@game.max_target_questions
-    a.target-question-container__toggle-btn.btn.btn-primary data-toggle="collapse" href=".target-question-container__form" role="button" aria-expanded="false" aria-controls="collapseExample"
-      | Do direct question
-      b.target-question-container__left
-    .target-question-container__form.collapse
-
+  - if @game.active?
+    #target-question-container data-available-target-question=@available_target_question data-game-target-questions-max=@game.max_target_questions
+      a.target-question-container__toggle-btn.btn.btn-primary data-toggle="collapse" href=".target-question-container__form" role="button" aria-expanded="false" aria-controls="collapseExample"
+        | Do direct question
+        b.target-question-container__left
+      .target-question-container__form.collapse
 
 
     / select.target-question-container__players-selector

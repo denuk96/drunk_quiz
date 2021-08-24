@@ -1,6 +1,7 @@
 import consumer from "./consumer"
 import shakeEffect from "../packs/shake_effect";
 import {updatePlayersList} from "../packs/game/targetQuestion";
+import questionTemplate from "../packs/templates/question";
 
 $( document ).on('turbolinks:load', function() {
   const gameContainer = $('#game-container')
@@ -38,9 +39,14 @@ $( document ).on('turbolinks:load', function() {
     // called when server publish something
     received(data) {
       console.log('received: ', data)
-      questionBody.html(questionTemplate(data))
-      shakeEffect(questionBody[0])
-      if (data.question == null) { nextQuestionBtn.hide() } else { nextQuestionBtn.show() }
+      switch (data.type) {
+        case 'game_state':
+          if (data.message === 'started') { document.location.reload() }
+          break
+        case 'question':
+          this.renderQuestion(data.message)
+          break
+      }
       updatePlayersList(data.players, playerId)
     },
 
@@ -57,6 +63,12 @@ $( document ).on('turbolinks:load', function() {
       this.perform("next_question")
     },
 
+    renderQuestion(data) {
+      questionBody.html(questionTemplate(data))
+      shakeEffect(questionBody[0])
+      if (data.question == null) { nextQuestionBtn.hide() } else { nextQuestionBtn.show() }
+    },
+
     addListeners() {
       startBtn.click(e => {
         this.startGame()
@@ -69,26 +81,4 @@ $( document ).on('turbolinks:load', function() {
       })
     },
   });
-
-  function questionTemplate(data) {
-    if (data.question) {
-      return `
-      <h5><b>${data.player_name}</b></h5>
-      <hr>
-      <p>
-        ${data.question}
-      </p>
-      <span>
-        Left ${data.questions_left}..
-      </span>
-    `
-    } else {
-      return `
-      <h5>No questions left</h5>
-      <p>
-        <a href="/">To main</a>
-      </p>
-    `
-    }
-  }
 })

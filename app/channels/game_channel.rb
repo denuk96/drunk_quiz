@@ -18,7 +18,7 @@ class GameChannel < ApplicationCable::Channel
   # custom public method
   def start_game
     game.active!
-    broadcast_question
+    broadcast_game_started
   end
 
   # custom public method
@@ -32,12 +32,21 @@ class GameChannel < ApplicationCable::Channel
   def current_question
     Rails.cache.fetch(channel_name, expires_in: 1.hours) do
       QuestionsManager.new(game).next_question
-    end.merge(players: all_players_hash)
+    end
+  end
+
+  def broadcast_game_started
+    broadcast(:game_state, :started)
   end
 
   def broadcast_question
+    broadcast(:question, current_question)
+  end
+
+  def broadcast(type, message)
+    data = { type: type, message: message, players: all_players_hash }
     # broadcasting data to each subscriber
-    ActionCable.server.broadcast(channel_name, current_question)
+    ActionCable.server.broadcast(channel_name, data)
   end
 
   def all_players_hash
