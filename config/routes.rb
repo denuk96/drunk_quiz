@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :players, only: %i[new create]
     resources :questions, only: %i[new create]
     get '/questions' => redirect { |params, _request| "games/#{params[:game_slug]}/questions/new" }, status: 301
+    post 'create_target_question', to: 'questions#create_target_question'
   end
 end

@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   include GameProcessConcern
+  include GamesHelper
   before_action -> { set_game(params[:game_slug]) }, -> { find_player(params[:game_slug]) }
 
   def new
@@ -11,8 +12,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = @game.questions.build(strong_params)
-    @question.player = @player
+    @question = @game.questions.build(question_params.merge(player_id: @player.id))
 
     if @question.save && max_questions?
       redirect_to game_path(slug: @game.slug)
@@ -26,6 +26,15 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def create_target_question
+    redirect_to game_path(slug: @game.slug) and return unless target_questions_available?
+
+    question = @game.questions.build(target_question_params.merge(player_id: @player.id))
+    flash[:errors] = question.errors.full_messages.to_sentence unless question.save
+
+    redirect_to game_path(slug: @game.slug)
+  end
+
   private
 
   def count_questions
@@ -33,7 +42,11 @@ class QuestionsController < ApplicationController
     @questions_left = @game.max_questions
   end
 
-  def strong_params
+  def question_params
     params.require(:question).permit(:text)
+  end
+
+  def target_question_params
+    params.permit(:text, :target_player_id)
   end
 end
