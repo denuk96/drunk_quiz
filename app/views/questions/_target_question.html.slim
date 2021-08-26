@@ -1,0 +1,14 @@
+#target-question-container.container data-available-target-question=available_target_question data-game-target-questions-max=game.max_target_questions
+  a.target-question-container__toggle-btn.btn.btn-primary data-toggle="collapse" href=".target-question-container__form" role="button" aria-expanded="false" aria-controls="collapseExample"
+    | Do direct question (#{available_target_question} left..)
+    b.target-question-container__left
+  = form_with url: game_create_target_question_path(game.slug), method: :post, local: true, html: { class: 'target-question-container__form collapse form__body' } do |f|
+    - if flash[:errors]
+      .alert.alert-danger
+        = flash[:errors]
+    .form-group
+      = f.select :target_player_id, options_for_select([]), {}, class: 'form-control', id: 'target-question-container__players-selector'
+    .form-group
+      = f.text_field :text, class: 'form-control'
+    .form-group.form__submit
+      = f.submit 'Send Question', class: 'btn btn-success form__submit-btn'

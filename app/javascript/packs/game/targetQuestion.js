@@ -5,6 +5,7 @@ export function updatePlayersList(players, playerId) {
 
 function appendSelect(selectablePlayers) {
 	let select = $('#target-question-container__players-selector')
+	select.empty()
 
 	selectablePlayers.forEach((p) => {
 		let option = document.createElement("option")

@@ -34,6 +34,14 @@ class Game < ApplicationRecord
     max_target_questions - questions.where(player_id: player_id).where.not(target_player_id: nil).count
   end
 
+  def players_hash
+    players.map { |p| { id: p.id, name: p.name} }
+  end
+
+  def available_questions_count
+    Question.available_questions(self.id).count
+  end
+
   private
 
   def create_slug

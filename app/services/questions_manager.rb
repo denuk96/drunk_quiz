@@ -40,7 +40,6 @@ class QuestionsManager
     {
       player_name: current_player.name,
       question: current_question&.text,
-      questions_left: questions.size
     }
   end
 end
