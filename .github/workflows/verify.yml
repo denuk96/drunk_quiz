@@ -46,7 +46,7 @@ jobs:
         env:
           POSTGRES_USER: myapp
           POSTGRES_DB: myapp_test
-          POSTGRES_PASSWORD: ""
+          POSTGRES_PASSWORD: password
         ports:
           - 5432:5432
     steps:
@@ -80,9 +80,9 @@ jobs:
       - name: Setup test database
         env:
           RAILS_ENV: test
-          DATABASE_HOST: 127.0.0.1
+          DATABASE_HOST: localhost
           DATABASE_NAME: myapp_test
           DATABASE_USER: myapp
-          DATABASE_PASSWORD: ""
+          DATABASE_PASSWORD: password
         run: |
           bin/rails db:setup
