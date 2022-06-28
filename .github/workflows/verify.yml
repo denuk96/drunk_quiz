@@ -42,13 +42,13 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:13.2
+        image: postgres:13
         env:
           POSTGRES_USER: myapp
           POSTGRES_DB: myapp_test
           POSTGRES_PASSWORD: ""
-        ports: ["5432:5432"]
-
+        ports:
+          - 5432:5432
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -80,7 +80,9 @@ jobs:
       - name: Setup test database
         env:
           RAILS_ENV: test
-          PGHOST: localhost
-          PGUSER: myapp
+          DATABASE_HOST: 127.0.0.1
+          DATABASE_NAME: myapp_test
+          DATABASE_USER: myapp
+          DATABASE_PASSWORD: ""
         run: |
           bin/rails db:setup
