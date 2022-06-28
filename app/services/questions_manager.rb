@@ -39,7 +39,7 @@ class QuestionsManager
   def output
     {
       player_name: current_player.name,
-      question: current_question&.text,
+      question: current_question&.text
     }
   end
 end

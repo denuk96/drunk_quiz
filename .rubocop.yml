@@ -4,6 +4,12 @@ AllCops:
     - db/schema.rb
     - node_modules/**/*
     - db/migrate/*
+    - bin/*
+    - config/environments/*
+    - config/initializers/simple_form_bootstrap.rb
+    - config/puma.rb
+    - lib/tasks/auto_annotate_models.rake
+    - vendor/**/*
 Metrics/LineLength:
   # This will disable the rule completely, regardless what other options you put
   # Enabled: false

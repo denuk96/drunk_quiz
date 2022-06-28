@@ -10,18 +10,18 @@ module ExceptionHandlerConcern
   private
 
   def on_routing_error
-    render_404
+    render404
   end
 
   def on_record_not_found
-    render_404
+    render404
   end
 
   def on_session_auth_error
     redirect_to_new_player
   end
 
-  def render_404
+  def render404
     render 'static/404', status: 404
   end
 

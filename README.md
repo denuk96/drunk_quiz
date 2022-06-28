@@ -9,6 +9,16 @@ to build containers:
 <br>
 `docker-compose build`
 
+to fetch gems:
+<br>
+`docker-compose exec app bundle install`
+
+to setup db:
+<br>
+`docker-compose exec app rake db:setup`
+<br>
+`docker-compose exec app rake db:migrate`
+
 to run app:
 <br>
 `docker-compose up`
@@ -24,6 +34,3 @@ to run console:
 just get into command line:
 <br>
 `docker-compose exec app sh`
-
-
-
