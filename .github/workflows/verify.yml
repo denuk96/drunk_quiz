@@ -1,5 +1,7 @@
 name: Verify
-on: [push]
+on:
+  push:
+  pull_request:
 
 jobs:
   linters:
@@ -88,4 +90,4 @@ jobs:
           bin/rails db:setup
 
       - name: Run tests
-        run: rspec
+        run: bin/rspec
