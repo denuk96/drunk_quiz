@@ -34,3 +34,7 @@ to run console:
 just get into command line:
 <br>
 `docker-compose exec app sh`
+
+to run rspec: 
+<br>
+`docker-compose exec -e RAILS_ENV='development' app  sh -c rspec`
