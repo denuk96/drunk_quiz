@@ -42,6 +42,4 @@ RUN yarn install --check-files
 
 COPY . ./
 
-RUN bundle update
-
 ENTRYPOINT ["sh", "entrypoints/docker-entrypoint.sh"]
