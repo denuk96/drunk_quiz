@@ -3,6 +3,13 @@ on:
   push:
   pull_request:
 
+env:
+  RAILS_ENV: test
+  DATABASE_HOST: localhost
+  DATABASE_NAME: myapp_test
+  DATABASE_USER: myapp
+  DATABASE_PASSWORD: password
+
 jobs:
   linters:
     name: Linters
@@ -21,9 +28,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14
+
       - name: Find yarn cache location
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
+
       - name: JS package cache
         uses: actions/cache@v3
         with:
@@ -31,6 +40,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+
       - name: Install packages
         run: |
           yarn install --pure-lockfile
@@ -65,9 +75,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14
+
       - name: Find yarn cache location
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
+
       - name: JS package cache
         uses: actions/cache@v1
         with:
@@ -75,17 +87,12 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+
       - name: Install packages
         run: |
           yarn install --pure-lockfile
 
       - name: Setup test database
-        env:
-          RAILS_ENV: test
-          DATABASE_HOST: localhost
-          DATABASE_NAME: myapp_test
-          DATABASE_USER: myapp
-          DATABASE_PASSWORD: password
         run: |
           bin/rails db:setup
 
