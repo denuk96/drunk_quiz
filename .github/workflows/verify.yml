@@ -10,6 +10,13 @@ env:
   DATABASE_USER: myapp
   DATABASE_PASSWORD: password
 
+setup_ruby: &setup_ruby
+  name: Setup Ruby and install gems
+  uses: ruby/setup-ruby@v1
+  with:
+    ruby-version: '2.7.2'
+    bundler-cache: true
+
 jobs:
   linters:
     name: Linters
@@ -18,11 +25,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Ruby and install gems
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '2.7.2'
-          bundler-cache: true
+      - <<: *setup_ruby
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -69,11 +72,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Ruby and install gems
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '2.7.2'
-          bundler-cache: true
+      - <<: *setup_ruby
 
       - name: Setup Node
         uses: actions/setup-node@v3
