@@ -27,6 +27,9 @@ group :development, :test do
   gem 'rspec-mocks'
   gem 'rspec-rails'
   gem 'rspec-support'
+
+  gem 'brakeman'
+  gem 'bundler-audit'
 end
 
 group :development do
