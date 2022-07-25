@@ -37,4 +37,4 @@ just get into command line:
 
 to run rspec: 
 <br>
-`docker-compose exec -e RAILS_ENV='development' app  sh -c rspec`
+`docker-compose exec -e RAILS_ENV='test' app  sh -c rspec`
