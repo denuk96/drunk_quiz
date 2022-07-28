@@ -95,7 +95,7 @@ jobs:
         run: |
           bundle exec rake db:setup
       - name: Run tests
-        run: bin/rspec
+        run: rspec
   deploy:
     name: Deploy
 #    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
