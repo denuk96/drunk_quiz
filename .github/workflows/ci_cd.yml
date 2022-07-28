@@ -3,13 +3,6 @@ on:
   push:
   pull_request:
 
-env:
-  RAILS_ENV: test
-  DATABASE_HOST: localhost
-  DATABASE_NAME: myapp_test
-  DATABASE_USER: myapp
-  DATABASE_PASSWORD: password
-
 jobs:
   linters:
     name: Linters
@@ -99,12 +92,18 @@ jobs:
       - name: Setup test database
         run: |
           bin/rails db:setup
+        env:
+          RAILS_ENV: test
+          DATABASE_HOST: localhost
+          DATABASE_NAME: myapp_test
+          DATABASE_USER: myapp
+          DATABASE_PASSWORD: password
 
       - name: Run tests
         run: bin/rspec
   deploy:
 #    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    needs: tests
+    needs: [tests, linters]
     runs-on: ubuntu-latest
 
     steps:
