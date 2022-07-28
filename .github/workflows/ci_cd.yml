@@ -3,6 +3,13 @@ on:
   push:
   pull_request:
 
+env:
+  RAILS_ENV: test
+  DATABASE_HOST: localhost
+  DATABASE_NAME: myapp_test
+  DATABASE_USER: myapp
+  DATABASE_PASSWORD: password
+
 jobs:
   linters:
     name: Linters
@@ -33,11 +40,9 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-
       - name: Install packages
         run: |
           yarn install --pure-lockfile
-
       - name: Run linters
         run: |
           bundle exec rubocop
@@ -45,7 +50,6 @@ jobs:
         run: |
           bundle exec bundler-audit --update
           bundle exec brakeman -q -w2
-
   tests:
     name: Tests
     runs-on: ubuntu-latest
@@ -84,24 +88,16 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-
       - name: Install packages
         run: |
           yarn install --pure-lockfile
-
       - name: Setup test database
         run: |
-          bin/rails db:setup
-        env:
-          RAILS_ENV: test
-          DATABASE_HOST: localhost
-          DATABASE_NAME: myapp_test
-          DATABASE_USER: myapp
-          DATABASE_PASSWORD: password
-
+          bundle exec rake db:setup
       - name: Run tests
         run: bin/rspec
   deploy:
+    name: Deploy
 #    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     needs: [tests, linters]
     runs-on: ubuntu-latest
