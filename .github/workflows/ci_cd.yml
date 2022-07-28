@@ -97,7 +97,7 @@ jobs:
         run: bin/rspec
   deploy:
     name: Deploy
-#    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     needs: [tests, linters]
     runs-on: ubuntu-latest
 
