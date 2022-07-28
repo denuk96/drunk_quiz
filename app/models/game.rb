@@ -26,7 +26,7 @@ class Game < ApplicationRecord
 
   enum status: %i[open active closed]
 
-  validates_presence_of *SAFE_ATTRIBUTES, :status
+  validates_presence_of(*SAFE_ATTRIBUTES, :status)
 
   before_create :create_slug
 
@@ -35,11 +35,11 @@ class Game < ApplicationRecord
   end
 
   def players_hash
-    players.map { |p| { id: p.id, name: p.name} }
+    players.map { |p| { id: p.id, name: p.name } }
   end
 
   def available_questions_count
-    Question.available_questions(self.id).count
+    Question.available_questions(id).count
   end
 
   private

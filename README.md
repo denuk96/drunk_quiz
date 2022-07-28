@@ -9,6 +9,16 @@ to build containers:
 <br>
 `docker-compose build`
 
+to fetch gems:
+<br>
+`docker-compose exec app bundle install`
+
+to setup db:
+<br>
+`docker-compose exec app rake db:setup`
+<br>
+`docker-compose exec app rake db:migrate`
+
 to run app:
 <br>
 `docker-compose up`
@@ -25,5 +35,6 @@ just get into command line:
 <br>
 `docker-compose exec app sh`
 
-
-
+to run rspec: 
+<br>
+`docker-compose exec -e RAILS_ENV='test' app  sh -c rspec`

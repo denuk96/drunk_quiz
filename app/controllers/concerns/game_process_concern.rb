@@ -7,7 +7,7 @@ module GameProcessConcern
     @player.questions.count >= @game.max_questions
   end
 
-  def set_game(slug)
+  def set_game(slug) # rubocop:disable Naming/AccessorMethodName
     @game = Game.find_by!(slug: slug)
   end
 

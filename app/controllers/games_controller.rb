@@ -25,6 +25,7 @@ class GamesController < ApplicationController
 
   def show
     redirect_to new_game_question_path(game_slug: @game.slug) and return unless can_join?
+
     @available_target_question = @game.target_questions_left(@player.id)
   end
 
