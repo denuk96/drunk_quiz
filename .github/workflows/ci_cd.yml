@@ -1,4 +1,4 @@
-name: Verify
+name: CI/CD
 on:
   push:
   pull_request:
@@ -21,7 +21,7 @@ jobs:
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7.2'
+          ruby-version: '2.7.6'
           bundler-cache: true
 
       - name: Setup Node
@@ -72,7 +72,7 @@ jobs:
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7.2'
+          ruby-version: '2.7.6'
           bundler-cache: true
 
       - name: Setup Node
@@ -102,3 +102,15 @@ jobs:
 
       - name: Run tests
         run: bin/rspec
+  deploy:
+#    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "drunk-quiz"
+          heroku_email: "e_den9611@live.com"
